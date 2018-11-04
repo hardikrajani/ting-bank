@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+                 version="1.0">
+    <package>com.hardik.bank.common.model</package>
+    <entity class="com.hardik.bank.common.model.Account" name="Account">
+        <attributes>
+            <id name="accountId">
+                <generated-value />
+            </id>
+            <basic name="balance"/>
+            <many-to-one name="customer" target-entity="com.hardik.bank.common.model.Customer">
+                <join-column name="customerId" nullable="false" />
+            </many-to-one>
+            <one-to-many name="bankTransactions" target-entity="com.hardik.bank.common.model.BankTransaction" mapped-by="account" />
+        </attributes>
+    </entity>
+    <entity class="com.hardik.bank.common.model.Customer" name="Customer">
+        <attributes>
+            <id name="customerId">
+                <generated-value />
+            </id>
+            <basic name="name"/>
+        </attributes>
+    </entity>
+    <entity class="com.hardik.bank.common.model.BankTransaction" name="BankTransaction">
+        <attributes>
+            <id name="transactionId">
+                <generated-value />
+            </id>
+            <basic name="amount"/>
+            <many-to-one name="account" target-entity="com.hardik.bank.common.model.Account">
+                <join-column name="accountId" nullable="false" />
+            </many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>
