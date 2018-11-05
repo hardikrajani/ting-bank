@@ -25,7 +25,7 @@ java -cp h2*.jar org.h2.tools.Server -webAllowOthers -tcpAllowOthers
 ```
 2. Run Maven - Build all components first
 ```
-cd <PROJECT_HOME>s
+cd <PROJECT_HOME>
 mvn clean install
 ```
 3. Start tb-accounts module
