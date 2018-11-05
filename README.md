@@ -2,50 +2,57 @@
 
 ### Description
 
-Ting Bank kind of sub application. It allows existing users of the application to open an account. I.E. Amazon started amazon pay, they created wallet account for their existing users. 
+Ting Bank is an application aimed to show how we can write microservices using spring boot.
 
-This project provides API to open account and transact for the account. API provides functionality like open account, list accounts, make credit/withdraw transaction, list transactions.
+The application has 3 maven modules representing following.
 
-There are three entities included in API.
-1) Customer
-2) Accounts
-3) Transactions
+1. Common - Provides basic models shared between different microservices
+2. Accounts - Provides APIs for Account related operations like Open Bank Account
+3. Transactions - Provides APIs for transactions like deposit, withdraw
+
+I have used **Java 8, Spring Boot, Swagger** (to test the APIs) and **H2 database**. 
+
+Please note that H2 db is not embedded as accounts and transactions both use the same database with their own session factory. This should be improved for better performance.
 
 ### How to run the app
 
 Following are the steps to run the application
-1) Start H2 server
-	Go to dbserver/ directory.
-	run following command.
-	java -cp h2*.jar org.h2.tools.Server -webAllowOthers -tcpAllowOthers
-2) Start tb-accounts module
-	Go to tb-accounts/ directory
-	run spring boot application
-3) Start tb-transaction module
-	Go to tb-transactions/ directory
-	run spring boot application
-4) Swagger is configured for both the module. Link details are provided in Links section.
 
-### Assumptions
-
-1. Security is considered out of scope for this application
-2. All the amounts are in double to keep API simple
-3. Customer can create as many accounts as he wants
-
-> Maven
-```bash
+1. Start H2 server
+```
+cd <PROJECT_HOME>/db-server
+java -cp h2*.jar org.h2.tools.Server -webAllowOthers -tcpAllowOthers
+```
+2. Run Maven - Build all components first
+```
+cd <PROJECT_HOME>s
+mvn clean install
+```
+3. Start tb-accounts module
+```
+cd <PROJECT_HOME>/tb-accounts
 mvn spring-boot:run
 ```
-
-### Links
+4. Start tb-transaction module
+```
+cd <PROJECT_HOME>/tb-transactions
+mvn spring-boot:run
+```
+5. Use following links to access different APIs or consolve
 
 * [Accounts](http://localhost:18081/swagger-ui.html)
 * [Transactios](http://localhost:18082/swagger-ui.html)
-* [H2 Database Console](http://localhost:8080/console/)
+* [H2 Database Console](http://localhost:8082/console/)
 
-### Tools used
+### Assumptions
 
-1. Java 8
-2. Spring Boot 2
-3. H2 server
-4. Swagger
+1. Customer can create as many accounts as he wants
+2. DB Performance & Security is considered out of scope
+
+### Extending the example
+
+I can stil add following 
+
+1. Liferay CMS - Portlet based UI to allow end user to access the APIs
+2. Docker - For containerization
+3. Better transaction management
