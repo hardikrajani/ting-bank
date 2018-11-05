@@ -107,6 +107,5 @@
 	<module>tb-common</module>
 	<module>tb-accounts</module>
 	<module>tb-transactions</module>
-	<module>tb-ui</module>
 </modules>
 </project>

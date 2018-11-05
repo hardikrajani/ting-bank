@@ -51,7 +51,7 @@ mvn spring-boot:run
 
 ### Extending the example
 
-I can stil add following 
+I can still add following 
 
 1. Liferay CMS - Portlet based UI to allow end user to access the APIs
 2. Docker - For containerization
